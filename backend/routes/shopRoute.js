@@ -5,14 +5,15 @@ const {
   shopDelete,
   getAllShops,
   getshopDetails,
+  getAdminShops,
 } = require("../controller/shopController");
 
 const router = express.Router();
 
-router.route("/registerShop").post(shopRegister);
-router.route("/updateShop/:id").put(shopUpdate);
-router.route("/deleteShop/:id").delete(shopDelete);
-router.route("/getAllShops").get(getAllShops);
-router.route("/getShopDetails/:id").get(getshopDetails);
+router.route("/shop/new").post(shopRegister);
+router.route("/merchant/shop/:id").put(shopUpdate).delete(shopDelete);
+router.route("/shops").get(getAllShops);
+router.route("/admin/shops").get(getAdminShops)
+router.route("/shop/:id").get(getshopDetails);
 
 module.exports = router;
