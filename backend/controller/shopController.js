@@ -4,12 +4,14 @@ const ErrorHandler = require("../utils/errorHandler");
 
 // Register a Shop
 exports.shopRegister = catchAsyncErrors(async (req, res, next) => {
-  const { name, slogan, description, shopContact, address } = req.body;
+  const { name, slogan, description, shopEmail, shopContact, address } =
+    req.body;
 
   const shop = await Shop.create({
     name,
     slogan,
     description,
+    shopEmail,
     shopContact,
     address,
   });
@@ -51,7 +53,7 @@ exports.shopDelete = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Shop not found", 404));
   }
 
-  await shop.remove();
+  await Shop.remove();
   res.status(200).json({
     success: true,
     message: "Shop Deleted Successfully!",

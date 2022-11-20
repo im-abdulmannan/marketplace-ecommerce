@@ -16,6 +16,11 @@ const shopSchema = new mongoose.Schema({
     required: [true, "Please Enter Your Shop Details"],
     minLength: [30, "Minimum length of description should be 30 characters"],
   },
+  shopEmail: {
+    type: String,
+    required: [true, "Please Enter Your Email"],
+    unique: true,
+  },
   shopContact: {
     type: Number,
     required: [true, "Please Enter Shop Contact"],
