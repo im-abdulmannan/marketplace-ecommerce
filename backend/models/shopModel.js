@@ -28,7 +28,6 @@ const shopSchema = new mongoose.Schema({
   address: {
     type: String,
     required: [true, "Please Enter Your Shop Address"],
-    unique: true,
   },
   ratings: {
     type: Number,
