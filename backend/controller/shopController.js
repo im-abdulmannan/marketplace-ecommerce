@@ -96,7 +96,7 @@ exports.getAdminShops = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get Shop Details 
+// Get Shop Details
 exports.getshopDetails = catchAsyncErrors(async (req, res, next) => {
   const shop = await Shop.findById(req.params.id);
 
@@ -109,7 +109,6 @@ exports.getshopDetails = catchAsyncErrors(async (req, res, next) => {
     shop,
   });
 });
-
 
 // Review System
 // Create Review
@@ -213,6 +212,6 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: "Review Deleted Successfully!"
+    message: "Review Deleted Successfully!",
   });
 });

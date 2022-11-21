@@ -48,7 +48,7 @@ exports.getMerchantProducts = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get Product Details -- Users
+// Get Product Details
 exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
@@ -101,7 +101,7 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Review System -- User
+// Review System
 // Create Review
 exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
   const { rating, comment, productId } = req.body;
@@ -159,7 +159,7 @@ exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Delete Review
+// Delete Review -- Merchant
 exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.query.productId);
 
