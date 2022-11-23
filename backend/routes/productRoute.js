@@ -21,7 +21,7 @@ router.route("/merchant/product/:id").put(updateProduct).delete(deleteProduct);
 router.route("/products").get(getAllProducts);
 router.route("/product/:id").get(getProductDetails);
 // Reviews
-router.route("/review").put(createProductReview);
-router.route("/reviews").get(getProductReviews).delete(deleteReview);
+router.route("/product/review").put(createProductReview);
+router.route("/product/reviews").get(getProductReviews).delete(deleteReview);
 
 module.exports = router;
