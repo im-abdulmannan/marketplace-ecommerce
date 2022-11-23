@@ -69,7 +69,7 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Forgot Password
-exports.forgotPassword = catchAsyncErrors(async (req, res, net) => {
+exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
@@ -184,9 +184,9 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   if (req.body.avatar !== "") {
     const user = await User.findById(req.user.id);
 
-    const imageId = user.avatar.public_id;
+    // const imageId = user.avatar.public_id;
 
-    await Cloudinary.v2.uploader.destroy(imageId);
+    // await Cloudinary.v2.uploader.destroy(imageId);
 
     // const myCloud = await Cloudinary.v2.uploader.upload(req.body.avatar, {
     //   folder: "avatars",
@@ -212,6 +212,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
+    user,
   });
 });
 
@@ -240,8 +241,6 @@ exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
     user,
   });
 });
-
-
 
 // Change User Role -- Admin
 exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
