@@ -90,7 +90,7 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   try {
     await sendEmail({
       email: user.email,
-      subject: `Ecommerce Password Recovery`,
+      subject: `Marketplace Ecommerce Password Recovery`,
       message,
     });
 
@@ -179,6 +179,7 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   const newUserData = {
     name: req.body.name,
     email: req.body.email,
+    role: req.body.role,
   };
 
   if (req.body.avatar !== "") {
@@ -213,6 +214,22 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     user,
+  });
+});
+
+// Delete User
+exports.deleteProfile = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    return next(new ErrorHandler("User No Found", 404));
+  }
+
+  await user.remove();
+
+  res.status(200).json({
+    success: true,
+    message: "User deleted Successfully",
   });
 });
 
@@ -259,5 +276,21 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     user,
+  });
+});
+
+// User Delete -- Admin
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(new ErrorHandler("User No Found", 404));
+  }
+
+  await user.remove();
+
+  res.status(200).json({
+    success: true,
+    message: "User Deleted Successfully",
   });
 });
