@@ -25,9 +25,11 @@ router
   .route("/merchant/product/:id")
   .put(isAuthenticatedUser, authorizeRoles("merchant"), updateProduct)
   .delete(isAuthenticatedUser, authorizeRoles("merchant"), deleteProduct);
+
 // User End
 router.route("/products").get(getAllProducts);
 router.route("/product/:id").get(getProductDetails);
+
 // Reviews
 router.route("/product/review").put(isAuthenticatedUser, createProductReview);
 router
