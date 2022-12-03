@@ -5,15 +5,14 @@ const ErrorHandler = require("../utils/errorHandler");
 
 // Register a Shop
 exports.shopRegister = catchAsyncErrors(async (req, res, next) => {
-  const { name, slogan, description, shopEmail, shopContact, address } =
-    req.body;
+  const { name, slogan, description, address } = req.body;
 
   const shop = await Shop.create({
     name,
     slogan,
     description,
-    shopEmail,
-    shopContact,
+    shopEmail: req.user.email,
+    shopContact: req.user.contact,
     address,
   });
 
@@ -25,15 +24,38 @@ exports.shopRegister = catchAsyncErrors(async (req, res, next) => {
 
 // Update Shop
 exports.shopUpdate = catchAsyncErrors(async (req, res, next) => {
-  let shop = await Shop.findById(req.params.id);
+  const newShopData = {
+    name: req.body.name,
+    email: req.body.email,
+    slogan: req.body.slogan,
+    address: req.body.address,
+    description: req.body.description,
+  };
 
-  if (!shop) {
-    return next(new ErrorHandler("Shop not found", 404));
-  }
+  // if (req.body.image !== "") {
+  //   const shop = await Shop.findById(req.params.id);
 
-  // Images cloudinary
+  //   // const imageId = user.image.public_id;
 
-  shop = await Shop.findByIdAndUpdate(req.params.id, req.body, {
+  //   // await Cloudinary.v2.uploader.destroy(imageId);
+
+  //   // const myCloud = await Cloudinary.v2.uploader.upload(req.body.image, {
+  //   //   folder: "images",
+  //   //   width: 150,
+  //   //   crop: "scale",
+  //   // });
+
+  //   newShopData.image = {
+  //     public_id: {
+  //       type: String,
+  //     },
+  //     url: {
+  //       type: String,
+  //     },
+  //   };
+  // }
+
+  const shop = await Shop.findByIdAndUpdate(req.params.id, newShopData, {
     new: true,
     runValidators: true,
     useFindAndModify: false,
@@ -41,7 +63,6 @@ exports.shopUpdate = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    message: "Shop Updated Successfully!",
     shop,
   });
 });

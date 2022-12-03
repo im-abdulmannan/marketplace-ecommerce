@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 const shopSchema = new mongoose.Schema({
   name: {
@@ -18,8 +19,9 @@ const shopSchema = new mongoose.Schema({
   },
   shopEmail: {
     type: String,
-    required: [true, "Please Enter Your Email"],
+    required: [true, "Please Enter Your Email."],
     unique: true,
+    validate: [validator.isEmail, "Please Enter a valid Email."],
   },
   shopContact: {
     type: Number,
@@ -33,6 +35,13 @@ const shopSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  products: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Product",
+      required: true,
+    },
+  ],
   images: [
     {
       public_id: {
@@ -73,6 +82,10 @@ const shopSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
   },
 });
 

@@ -20,7 +20,9 @@ router
   .delete(isAuthenticatedUser, authorizeRoles("merchant"), shopDelete);
 
 router.route("/shops").get(getAllShops);
-router.route("/admin/shops").get(getAdminShops);
+router
+  .route("/admin/shops")
+  .get(isAuthenticatedUser, authorizeRoles("admin"), getAdminShops);
 router.route("/shop/:id").get(getshopDetails);
 
 module.exports = router;

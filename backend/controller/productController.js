@@ -1,11 +1,15 @@
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const Product = require("../models/productModel");
+const User = require("../models/userModel");
 const ApiFeatures = require("../utils/apifeatures");
 const ErrorHandler = require("../utils/errorHandler");
 
 // Create Product -- Merchant
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.create(req.body);
+
+  // req.body.user = req.user.id;
+  req.body.user = req.user.id;
 
   res.status(201).json({
     success: true,
@@ -39,13 +43,34 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Get All Products -- Merchant
-exports.getMerchantProducts = catchAsyncErrors(async (req, res, next) => {
-  const products = await Product.find();
+// exports.getMerchantProducts = catchAsyncErrors(async (req, res, next) => {
+//   const products = await Product.find();
 
-  res.status(200).json({
-    success: true,
-    products,
-  });
+//   res.status(200).json({
+//     success: true,
+//     products,
+//   });
+// });
+
+exports.getMerchantProducts = catchAsyncErrors(async (req, res, next) => {
+  try {
+    let products = await Product.find({ user: req.user.id }).populate(
+      "shop",
+      "id name"
+    );
+    // .select("-image");
+    res.json(products);
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+
+  // res.status(200).json({
+  //   success: true,
+  //   products,
+  // });
 });
 
 // Get Product Details
