@@ -6,10 +6,9 @@ const ErrorHandler = require("../utils/errorHandler");
 
 // Create Product -- Merchant
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.create(req.body);
-
-  // req.body.user = req.user.id;
   req.body.user = req.user.id;
+
+  const product = await Product.create(req.body);
 
   res.status(201).json({
     success: true,
@@ -54,11 +53,12 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
 
 exports.getMerchantProducts = catchAsyncErrors(async (req, res, next) => {
   try {
-    let products = await Product.find({ user: req.user.id }).populate(
-      "shop",
-      "id name"
-    );
-    // .select("-image");
+    let products = await Product.find({ user: req.user.id })
+    // .populate(
+    //   "shop",
+    //   "id name"
+    // );
+    // // .select("-image");
     res.json(products);
   } catch (error) {
     return res.status(400).json({
