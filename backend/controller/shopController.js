@@ -14,6 +14,7 @@ exports.shopRegister = catchAsyncErrors(async (req, res, next) => {
     shopEmail: req.user.email,
     shopContact: req.user.contact,
     address,
+    user: req.user.id,
   });
 
   res.status(201).json({
@@ -67,7 +68,7 @@ exports.shopUpdate = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Delete Shop -- Admin && Merchant
+// Delete Shop -- Admin
 exports.shopDelete = catchAsyncErrors(async (req, res, next) => {
   const shop = await Shop.findById(req.params.id);
 
@@ -117,7 +118,7 @@ exports.getAdminShops = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get Shop Details
+// Get Shop Details -- Admin
 exports.getshopDetails = catchAsyncErrors(async (req, res, next) => {
   const shop = await Shop.findById(req.params.id);
 
@@ -171,7 +172,7 @@ exports.createShopReview = catchAsyncErrors(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
-    review: shop.review,
+    review: shop.reviews,
   });
 });
 
@@ -198,7 +199,7 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   }
 
   const reviews = shop.reviews.filter(
-    (rev) => rev._id.toString() !== req.query.toString()
+    (rev) => rev._id.toString() !== req.query.id.toString()
   );
 
   let avg = 0;

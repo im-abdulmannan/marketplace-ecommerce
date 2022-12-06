@@ -8,7 +8,7 @@ const crypto = require("crypto");
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   // Cloudinary Avatar
-  const { name, email, password,contact } = req.body;
+  const { name, email, password, contact } = req.body;
 
   const user = await User.create({
     name,

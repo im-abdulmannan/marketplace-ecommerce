@@ -53,7 +53,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
 
 exports.getMerchantProducts = catchAsyncErrors(async (req, res, next) => {
   try {
-    let products = await Product.find({ user: req.user.id })
+    let products = await Product.find({ user: req.user.id });
     // .populate(
     //   "shop",
     //   "id name"
@@ -193,7 +193,7 @@ exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
   }
 
   const reviews = product.reviews.filter(
-    (rev) => rev._id.toString() !== req.query.toString()
+    (rev) => rev._id.toString() !== req.query.id.toString()
   );
 
   let avg = 0;
