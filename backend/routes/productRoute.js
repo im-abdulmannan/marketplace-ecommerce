@@ -1,3 +1,4 @@
+const { Router } = require("express");
 const express = require("express");
 const {
   createProduct,
@@ -9,6 +10,7 @@ const {
   createProductReview,
   getProductReviews,
   deleteReview,
+  getShopProducts,
 } = require("../controller/productController");
 const { isAuthenticatedUser, authorizeRoles } = require("../middlewares/auth");
 
@@ -25,6 +27,8 @@ router
   .route("/merchant/product/:id")
   .put(isAuthenticatedUser, authorizeRoles("merchant"), updateProduct)
   .delete(isAuthenticatedUser, authorizeRoles("merchant"), deleteProduct);
+
+router.route("/shop/products/:id").get(getShopProducts)
 
 // User End
 router.route("/products").get(getAllProducts);

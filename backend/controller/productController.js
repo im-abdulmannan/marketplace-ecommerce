@@ -1,6 +1,5 @@
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const Product = require("../models/productModel");
-const User = require("../models/userModel");
 const ApiFeatures = require("../utils/apifeatures");
 const ErrorHandler = require("../utils/errorHandler");
 
@@ -71,6 +70,20 @@ exports.getMerchantProducts = catchAsyncErrors(async (req, res, next) => {
   //   success: true,
   //   products,
   // });
+});
+
+// Get Shop Products
+exports.getShopProducts = catchAsyncErrors(async (req, res, next) => {
+  const products = await Product.find({ shop: req.params.id });
+
+  if (!products) {
+    return next(new ErrorHandler("Products Not Found", 404));
+  }
+
+  res.status(200).json({
+    success: true,
+    products,
+  });
 });
 
 // Get Product Details
