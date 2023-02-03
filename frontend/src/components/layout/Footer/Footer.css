@@ -2,7 +2,7 @@ footer {
     margin-top: 10vmax;
     padding: 2vmax;
     background-color: #9be0cb;
-    color: white;
+    color: rgb(27, 22, 22);
     display: flex;
     align-items: center;
   }
@@ -62,7 +62,7 @@ footer {
     text-decoration: none;
     font-size: 1.3vmax;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-    color: white;
+    color: rgb(27, 22, 22);
     transition: 0.5s;
     margin: 0.5vmax;
   }
