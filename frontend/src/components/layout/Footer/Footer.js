@@ -1,31 +1,36 @@
-import React from "react";
+import React, { Fragment } from "react";
 import playStore from "../../../images/playstore.png";
 import appStore from "../../../images/Appstore.png";
 import "./Footer.css";
 
 const Footer = () => {
   return (
-    <footer id="footer">
-      <div className="leftFooter">
-        <h4>Download Our App</h4>
-        <p>Download App for Android and IOS Mobile Phones</p>
-        <div>
-          <img src={playStore} alt="playStore" />
-          <img src={appStore} alt="appStore" />
+    <Fragment>
+      <footer id="footer">
+        <div className="leftFooter">
+          <h4>DOWNLOAD OUR APP</h4>
+          <p>Download App for Andriod and IOS mobile Phone</p>
+          <div>
+            <img src={playStore} alt="playstore" />
+            <img src={appStore} alt="Appstore" />
+          </div>
         </div>
-      </div>
-      <div className="midFooter">
-        <h1>MarketPlace.</h1>
-        <p>High Quality is our First Priority</p>
-        <p>Copyright © 2022 Abdul Mannan</p>
-      </div>
-      <div className="rightFooter">
-        <h4>Follow Us.</h4>
-        <a href="https://www.instagram.com/__haris__baig__/">Instagram</a>
-        <a href="https://www.facebook.com/haris.baig.5815">Facebook</a>
-        <a href="https://www.linkedin.com/in/haris-baig-665668231/">LinkedIn</a>
-      </div>
-    </footer>
+
+        <div className="midFooter">
+          <h1>ECOMMERCE.</h1>
+          <p>High Quality is our first Priority</p>
+
+          <p>Copyrights 2022 &copy; Abdul-Mannan</p>
+        </div>
+
+        <div className="rightFooter">
+          <h4>Follow Us</h4>
+          <a href="https://instagram.com/abd._.mannan">Instagram</a>
+          <a href="https://facebook.com/am360985">Facebook</a>
+          <a href="https://twitter.com/Abdul_mannan_i">Twitter</a>
+        </div>
+      </footer>
+    </Fragment>
   );
 };
 

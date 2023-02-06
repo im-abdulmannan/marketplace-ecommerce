@@ -3,7 +3,6 @@ import { ReactNavbar } from "overlay-navbar";
 import logo from "../../../images/logo.png";
 import { FaSearch, FaUserCircle } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
-import "./Header.css";
 
 const Header = () => {
   return (

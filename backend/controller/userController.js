@@ -9,11 +9,11 @@ const Cloudinary = require("cloudinary");
 // Register a User
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
   // Cloudinary Avatar
-  const myCloud = await Cloudinary.v2.uploader.upload(req.body.avatar, {
-    folder: "Avatars",
-    width: 150,
-    crop: "scale",
-  });
+  // const myCloud = await Cloudinary.v2.uploader.upload(req.body.avatar, {
+  //   folder: "Avatars",
+  //   width: 150,
+  //   crop: "scale",
+  // });
   const { name, email, password, contact } = req.body;
 
   const user = await User.create({
@@ -21,10 +21,10 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     email,
     password,
     contact,
-    avatar: {
-      public_id: myCloud.public_id,
-      url: myCloud.secure_url,
-    },
+    // avatar: {
+    //   public_id: myCloud.public_id,
+    //   url: myCloud.secure_url,
+    // },
   });
 
   res.status(201).json({
@@ -187,24 +187,24 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
     role: req.body.role,
   };
 
-  if (req.body.avatar !== "") {
-    const user = await User.findById(req.user.id);
+  // if (req.body.avatar !== "") {
+  //   const user = await User.findById(req.user.id);
 
-    const imageId = user.avatar.public_id;
+  //   const imageId = user.avatar.public_id;
 
-    await Cloudinary.v2.uploader.destroy(imageId);
+  //   await Cloudinary.v2.uploader.destroy(imageId);
 
-    const myCloud = await Cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: "avatars",
-      width: 150,
-      crop: "scale",
-    });
+  //   const myCloud = await Cloudinary.v2.uploader.upload(req.body.avatar, {
+  //     folder: "avatars",
+  //     width: 150,
+  //     crop: "scale",
+  //   });
 
-    newUserData.avatar = {
-      public_id: myCloud.public_id,
-      url: myCloud.secure_url,
-    };
-  }
+  //   newUserData.avatar = {
+  //     public_id: myCloud.public_id,
+  //     url: myCloud.secure_url,
+  //   };
+  // }
 
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,

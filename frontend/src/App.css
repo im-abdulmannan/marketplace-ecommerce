@@ -1,3 +1,8 @@
+:root {
+  --primary-button-color: #127fff;
+  --hover-primary-button-color: #0672ed;
+}
+
 .App {
   text-align: center;
 }

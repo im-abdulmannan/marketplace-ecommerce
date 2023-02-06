@@ -1,8 +1,8 @@
 import React from "react";
 import "./About.css";
-import { Button, Typography, Avatar } from "@mui/material";
-import { FaLinkedin, FaWhatsapp } from "react-icons/fa";
-
+import { Button, Typography, Avatar } from "@material-ui/core";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 const About = () => {
   const visitLinkedIn = () => {
     window.location = "https://www.linkedin.com/in/im-abdulmannan/";
@@ -36,14 +36,14 @@ const About = () => {
               href="https://www.linkedin.com/in/im-abdulmannan/"
               target="blank"
             >
-              <FaLinkedin className="linkedinSvgIcon" />
+              <LinkedInIcon className="linkedinSvgIcon" />
             </a>
 
             <a
               href="https://Wa.me/923030933861?text=Hi+there,+my+name+is"
               target="blank"
             >
-              <FaWhatsapp className="whatsappSvgIcon" />
+              <WhatsAppIcon className="whatsappSvgIcon" />
             </a>
           </div>
         </div>
