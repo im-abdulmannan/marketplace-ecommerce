@@ -1,22 +1,22 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Loader from "../layout/Loader/Loader";
-import MetaData from "../layout/MetaData";
-import { useAlert } from "react-alert";
-import { errorClear, updatePassword } from "../../actions/userAction";
-import { useNavigate } from "react-router-dom";
-import { UPDATE_PASSWORD_RESET } from "../../constants/userConstants";
+import React, { Fragment, useState, useEffect } from "react";
 import "./UpdatePassword.css";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
-import VpnKeyIcon from "@mui/icons-material/VpnKey";
-import LockIcon from "@mui/icons-material/Lock";
+import { useNavigate } from "react-router-dom";
+import Loader from "../layout/Loader/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePassword, clearErrors } from "../../actions/userAction";
+import { useAlert } from "react-alert";
+import { UPDATE_PASSWORD_RESET } from "../../constants/userConstant";
+import MetaData from "../layout/MetaData";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
+import LockIcon from "@material-ui/icons/Lock";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
 
 const UpdatePassword = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
   const navigate = useNavigate();
 
-  const { loading, error, isUpdated } = useSelector((state) => state.profile);
+  const { error, isUpdated, loading } = useSelector((state) => state.profile);
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -30,26 +30,24 @@ const UpdatePassword = () => {
     myForm.set("oldPassword", oldPassword);
     myForm.set("newPassword", newPassword);
     myForm.set("confirmPassword", confirmPassword);
-
     dispatch(updatePassword(myForm));
   };
 
   useEffect(() => {
     if (error) {
       alert.error(error);
-      dispatch(errorClear());
+      dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("Update Password Successfully");
-
+      alert.success("Password Updated Successfully");
       navigate("/account");
 
       dispatch({
         type: UPDATE_PASSWORD_RESET,
       });
     }
-  }, [error, alert, dispatch, isUpdated, navigate]);
+  }, [error, dispatch, alert, isUpdated, navigate]);
 
   return (
     <Fragment>
@@ -57,52 +55,45 @@ const UpdatePassword = () => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title="Update Profile" />
+          <MetaData title="Change Password" />
           <div className="updatePasswordContainer">
             <div className="updatePasswordBox">
-              <h2 className="updatePasswordHeading">Update Password</h2>
-
+              <h2 className="updatePasswordHeading">Update Profile</h2>
               <form
                 className="updatePasswordForm"
-                encType="multipart/form-data"
                 onSubmit={updatePasswordSubmit}
               >
-                <div className="signUpPassword">
+                <div className="loginPassword">
                   <VpnKeyIcon />
                   <input
                     type="password"
                     placeholder="Old Password"
-                    // name="oldPassword"
                     required
                     value={oldPassword}
                     onChange={(e) => setOldPassword(e.target.value)}
                   />
                 </div>
 
-                <div className="signUpPassword">
+                <div className="loginPassword">
                   <LockOpenIcon />
                   <input
                     type="password"
                     placeholder="New Password"
-                    // name="newPassword"
                     required
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                   />
                 </div>
-
-                <div className="signUpPassword">
+                <div className="loginPassword">
                   <LockIcon />
                   <input
                     type="password"
                     placeholder="Confirm Password"
-                    // name="confirmPassword"
                     required
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                 </div>
-
                 <input
                   type="submit"
                   value="Change"

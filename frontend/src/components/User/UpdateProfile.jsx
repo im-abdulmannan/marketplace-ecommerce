@@ -4,6 +4,7 @@ import Loader from "../layout/Loader/Loader";
 import MetaData from "../layout/MetaData";
 import FaceIcon from "@mui/icons-material/Face";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import ManIcon from "@mui/icons-material/Man";
 import { useAlert } from "react-alert";
 import { clearErrors, loadUser, updateProfile } from "../../actions/userAction";
 import { useNavigate } from "react-router-dom";
@@ -20,8 +21,11 @@ const UpdateProfile = () => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
   const [avatar, setAvatar] = useState();
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
+
+  const roles = ["Merchant", "User"];
 
   const updateProfileSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +34,7 @@ const UpdateProfile = () => {
 
     myForm.set("name", name);
     myForm.set("email", email);
+    myForm.set("role", role);
     myForm.set("avatar", avatar);
     dispatch(updateProfile(myForm));
   };
@@ -51,6 +56,7 @@ const UpdateProfile = () => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
+      setRole(user.role);
       setAvatarPreview(user.avatar);
     }
 
@@ -98,16 +104,32 @@ const UpdateProfile = () => {
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
+
                 <div className="updateProfileEmail">
                   <MailOutlineIcon />
                   <input
                     type="email"
                     placeholder="Email"
                     required
+                    readOnly
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
+                </div>
+
+                <div className="updateProfileRole">
+                  <ManIcon />
+                  <select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                  >
+                    {roles.map((role) => (
+                      <option key={role} value={role}>
+                        {role}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div id="updateProfileImage">

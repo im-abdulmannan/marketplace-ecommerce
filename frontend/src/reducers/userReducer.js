@@ -42,7 +42,6 @@ import {
 } from "../constants/userConstant";
 
 // User Reducer
-
 export const userReducer = (state = { user: {} }, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
@@ -106,7 +105,6 @@ export const userReducer = (state = { user: {} }, action) => {
 };
 
 // Profile Reducer
-
 export const profileReducer = (state = {}, action) => {
   switch (action.type) {
     case UPDATE_PROFILE_REQUEST:
@@ -171,7 +169,6 @@ export const profileReducer = (state = {}, action) => {
 };
 
 // Password Reducer
-
 export const passwordReducer = (state = {}, action) => {
   switch (action.type) {
     case FORGOT_PASSWORD_REQUEST:
@@ -216,7 +213,6 @@ export const passwordReducer = (state = {}, action) => {
 };
 
 // All User Reducer
-
 export const allUsersReducer = (state = { users: [] }, action) => {
   switch (action.type) {
     case ALL_USERS_REQUEST:
@@ -250,7 +246,6 @@ export const allUsersReducer = (state = { users: [] }, action) => {
 };
 
 // User Details Reducer
-
 export const userDetailsReducer = (state = { users: {} }, action) => {
   switch (action.type) {
     case USER_DETAILS_REQUEST:

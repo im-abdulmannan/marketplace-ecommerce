@@ -33,7 +33,7 @@
 
 .detailsBlock-1 > p {
   color: rgba(54, 54, 54, 0.582);
-  font: 300 0.8vmax cursive;
+  font: 200 0.6vmax cursive;
 }
 
 .detailsBlock-2 {
@@ -92,7 +92,7 @@
   cursor: pointer;
   color: white;
   transition: all 0.5s;
-  background-color: var(--primary-button-color);
+  background-color: #127fff;
   font: 500 0.7vmax "Roboto";
   border-radius: 20px;
   padding: 0.5vmax 2vmax;
@@ -101,7 +101,7 @@
 }
 
 .detailsBlock-3-1 > button:last-child:hover {
-  background-color: var(--hover-primary-button-color);
+  background-color: #127fff;
 }
 
 .detailsBlock-3 > p {
@@ -125,7 +125,7 @@
 
 .submitReview {
   border: none;
-  background-color: var(--primary-button-color);
+  background-color: #127fff;
   font: 500 0.7vmax "Roboto";
   border-radius: 20px;
   padding: 0.6vmax 2vmax;
@@ -136,7 +136,7 @@
   outline: none;
 }
 .submitReview:hover {
-  background-color: var(--hover-primary-button-color);
+  background-color: rgb(197, 68, 45);
   transform: scale(1.1);
 }
 

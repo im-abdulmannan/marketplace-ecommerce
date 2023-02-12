@@ -1,21 +1,21 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Loader from "../layout/Loader/Loader";
-import MetaData from "../layout/MetaData";
-import LockOpenIcon from "@mui/icons-material/LockOpen";
-import LockIcon from "@mui/icons-material/Lock";
-import { useAlert } from "react-alert";
-import { errorClear, resetPassword } from "../../actions/userAction";
+import React, { Fragment, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./ResetPassword.css";
+import Loader from "../layout/Loader/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { resetPassword, clearErrors } from "../../actions/userAction";
+import { useAlert } from "react-alert";
+import MetaData from "../layout/MetaData";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
+import LockIcon from "@material-ui/icons/Lock";
 
 const ResetPassword = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const navigate = useNavigate();
   const { token } = useParams();
+  const navigate = useNavigate();
 
-  const { error, loading, success } = useSelector(
+  const { error, success, loading } = useSelector(
     (state) => state.forgotPassword
   );
 
@@ -29,22 +29,20 @@ const ResetPassword = () => {
 
     myForm.set("password", password);
     myForm.set("confirmPassword", confirmPassword);
-
     dispatch(resetPassword(token, myForm));
   };
 
   useEffect(() => {
     if (error) {
       alert.error(error);
-      dispatch(errorClear());
+      dispatch(clearErrors());
     }
 
     if (success) {
       alert.success("Password Updated Successfully");
-
       navigate("/login");
     }
-  }, [error, alert, dispatch, success, navigate]);
+  }, [dispatch, error, alert, navigate, success]);
 
   return (
     <Fragment>
@@ -56,7 +54,6 @@ const ResetPassword = () => {
           <div className="resetPasswordContainer">
             <div className="resetPasswordBox">
               <h2 className="resetPasswordHeading">Update Profile</h2>
-
               <form
                 className="resetPasswordForm"
                 onSubmit={resetPasswordSubmit}
@@ -65,14 +62,13 @@ const ResetPassword = () => {
                   <LockOpenIcon />
                   <input
                     type="password"
-                    placeholder="New Password"
+                    placeholder="Passowrd"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
-
-                <div className="loginPassword">
+                <div className="loginPasswordForm">
                   <LockIcon />
                   <input
                     type="password"
@@ -82,7 +78,6 @@ const ResetPassword = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                 </div>
-
                 <input
                   type="submit"
                   value="Update"
