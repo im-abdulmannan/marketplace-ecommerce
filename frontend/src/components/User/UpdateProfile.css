@@ -46,17 +46,7 @@
   align-items: center;
 }
 
-.updateProfileForm > div > input {
-  padding: 1vmax 4vmax;
-  padding-right: 1vmax;
-  width: 100%;
-  box-sizing: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.267);
-  border-radius: 4px;
-  font: 300 1.4vmax cursive;
-  outline: none;
-}
-
+.updateProfileForm > div > input,
 .updateProfileForm > div > select {
   padding: 1vmax 4vmax;
   padding-right: 1vmax;
@@ -67,6 +57,7 @@
   font: 300 1.4vmax cursive;
   outline: none;
 }
+
 .updateProfileForm > div > svg {
   position: absolute;
   transform: translateX(1vmax);
