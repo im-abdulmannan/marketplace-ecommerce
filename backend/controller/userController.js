@@ -1,5 +1,6 @@
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const User = require("../models/userModel");
+const Shop = require("../models/shopModel");
 const ErrorHandler = require("../utils/errorHandler");
 const sendToken = require("../utils/jwtToken.js");
 const sendEmail = require("../utils/sendEmail.js");
@@ -264,27 +265,27 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// User Delete -- Admin
-exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
-  const user = await User.findById(req.params.id);
+// // User Delete -- Admin
+// exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+//   const user = await User.findById(req.params.id);
 
-  if (!user) {
-    return next(
-      new ErrorHandler(`User does not exist with Id: ${req.params.id}`, 400)
-    );
-  }
+//   if (!user) {
+//     return next(
+//       new ErrorHandler(`User does not exist with Id: ${req.params.id}`, 400)
+//     );
+//   }
 
-  const imageId = user.avatar.public_id;
+//   const imageId = user.avatar.public_id;
 
-  await Cloudinary.v2.uploader.destroy(imageId);
+//   await Cloudinary.v2.uploader.destroy(imageId);
 
-  await user.remove();
+//   await user.remove();
 
-  res.status(200).json({
-    success: true,
-    message: "User Deleted Successfully",
-  });
-});
+//   res.status(200).json({
+//     success: true,
+//     message: "User Deleted Successfully",
+//   });
+// });
 
 // Delete User
 exports.deleteProfile = catchAsyncErrors(async (req, res, next) => {
@@ -303,5 +304,38 @@ exports.deleteProfile = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     message: "User deleted Successfully",
+  });
+});
+
+// Delete User -- Admin
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(
+      new ErrorHandler(`User Doesn't Exist with Id: ${req.params.id}`, 400)
+    );
+  }
+
+  if (user.role == "merchant") {
+    const shop = await Shop.findOne({user: req.params.id});
+    console.log(shop);
+
+    if (!shop) {
+      new ErrorHandler(`Shop Doesn't Exist with Id: ${req.params.id}`, 400);
+    }
+
+    await shop.remove();
+  }
+
+  // const imageId = user.avatar.public_id;
+
+  // await Cloudinary.v2.uploader.destroy(imageId);
+
+  await user.remove();
+
+  res.status(200).json({
+    success: true,
+    message: "User Deleted Successfully",
   });
 });

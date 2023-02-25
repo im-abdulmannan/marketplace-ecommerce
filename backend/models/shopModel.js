@@ -4,18 +4,18 @@ const validator = require("validator");
 const shopSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Please Enter Your Shop Name"],
+    // required: [true, "Please Enter Your Shop Name"],
   },
   slogan: {
     type: String,
-    required: [true, "Please Enter Shop Slogan"],
-    minLength: [8, "Slogan should be greater than 8 Characters"],
-    maxLenght: [30, "Slogan should not be greater than 30 Charachters"],
+    // required: [true, "Please Enter Shop Slogan"],
+    // minLength: [8, "Slogan should be greater than 8 Characters"],
+    // maxLenght: [30, "Slogan should not be greater than 30 Charachters"],
   },
   description: {
     type: String,
-    required: [true, "Please Enter Your Shop Details"],
-    minLength: [30, "Minimum length of description should be 30 characters"],
+    // required: [true, "Please Enter Your Shop Details"],
+    // minLength: [30, "Minimum length of description should be 30 characters"],
   },
   shopEmail: {
     type: String,
@@ -25,11 +25,11 @@ const shopSchema = new mongoose.Schema({
   },
   shopContact: {
     type: Number,
-    required: [true, "Please Enter Shop Contact"],
+    // required: [true, "Please Enter Shop Contact"],
   },
   address: {
     type: String,
-    required: [true, "Please Enter Your Shop Address"],
+    // required: [true, "Please Enter Your Shop Address"],
   },
   ratings: {
     type: Number,

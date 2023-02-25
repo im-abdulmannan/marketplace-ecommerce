@@ -61,6 +61,8 @@ const ProductDetails = () => {
     setQuantity(qty);
   };
 
+  console.log(product.stock, "......");
+
   const addToCartHandler = () => {
     dispatch(addItemsToCart(id, quantity));
     alert.success("Items Added to Cart Successfully");
